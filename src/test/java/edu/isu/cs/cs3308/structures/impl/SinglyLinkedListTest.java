@@ -1,6 +1,6 @@
 package edu.isu.cs.cs3308.structures.impl;
 
-import csci132.structures.List;
+import edu.isu.cs.cs3308.structures.List;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
