@@ -13,4 +13,8 @@ import java.util.Random;
  * CS-3308 Mission 01
  */
 
+public class SinglyLinkedListTest {
+
+    private List<Integer>;
+
 
