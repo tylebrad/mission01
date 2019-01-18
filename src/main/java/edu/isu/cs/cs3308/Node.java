@@ -7,13 +7,33 @@
 package edu.isu.cs.cs3308.structures;
 
 public class Node<E>{
-
+    // declaring variables
     private E data;
     private Node<E> next;
-
+    private Node<E> prev;
+    // public variable for node data
     public Node(E data) {this.data = data;}
 
-    public E getData(){return data;}
+    // gets data from node
+    public E getData(){
+        return data;
+    }
 
     public void setData(E data) {this.data = data;}
+    // returning previous node
+    public Node<E> getPrev(){
+        return prev;
+    }
+    // returning next node
+    public Node<E> getNext(){
+        return next;
+    }
+    // setting data to previous node
+    public void setPrev(Node<E> prev){
+        this.prev = prev;
+    }
+    // setting data to next node
+    public void setNext(Node<E> next){
+        this.next = next;
+    }
 }

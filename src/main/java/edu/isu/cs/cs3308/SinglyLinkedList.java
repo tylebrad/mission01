@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class to Implement Singly Linked List
+ * Class to Implement a Singly Linked List
  *
  * @author Bradley Tyler
  * CS-3308 Mission 01
@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class SinglyLinkedList<E> implements List<E>{
 
-    protected Node<E>
+    protected Node<E>;
 
     }
 }
