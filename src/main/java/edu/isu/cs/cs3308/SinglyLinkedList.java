@@ -12,30 +12,53 @@ import edu.isu.cs.cs3308.structures.List;
 
 public class SinglyLinkedList<E> implements List<E> {
 
+    /**
+     *Class to create Nodes for SinglyLinkedList
+     *Nested Within SinglyLinkedList
+     */
+    private static class Node<E>{
+        // declaring variables
+        private E data;
+        private Node<E> next;
+        private Node<E> prev;
+        // public variable for node data
+        public Node(E data) {this.data = data;}
+
+        // gets data from node
+        public E getData(){
+            return data;
+        }
+
+        public void setData(E data) {this.data = data;}
+        // returning next node
+        public Node<E> getNext(){
+            return next;
+        }
+        // setting data to next node
+        public void setNext(Node<E> next){
+            this.next = next;
+        }
+    }
+
+    //Instance variables
     protected Node<E> head;
     protected Node<E> tail;
-    protected int size = 0;
+    protected int size;
 
+    // Access methods
     @Override
     public E first() {
-        return null;
+        if(isEmpty()) return null;
+            return head.getData();
     }
 
     @Override
     public E last() {
-        return null;
+        if(isEmpty()) return null;
+            return tail.getData();
     }
 
-    @Override
-    public E removeFirst() {
-        return null;
-    }
-
-    @Override
-    public E removeLast() {
-        return null;
-    }
-
+    // Update Methods
     @Override
     public void addFirst(E item) {
         if (item == null)
@@ -48,7 +71,16 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void addLast(E item) {
+        
+    }
+    @Override
+    public E removeFirst() {
+        return null;
+    }
 
+    @Override
+    public E removeLast() {
+        return null;
     }
 
     @Override
