@@ -72,15 +72,28 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /** Update Methods */
-    //Adds item to beginning of the list
+
+    /**
+     * Adds the provided element to the front of the list, only if the element
+     * is not null.
+     *
+     * @param item Item to be added to the front of the list.
+     */
     @Override
     public void addFirst(E item) {
+        if (item == null)
+                return;
         Node<E> newNode = new Node<>(item, head);
-        head.setNext(newNode);
+        newNode.setNext(head);
         head = newNode;
         size ++;
     }
-    //Adds item to the end of the list
+    /**
+     * Adds the provided element to the end of the list, only if the element is
+     * not null.
+     *
+     * @param item Item to be added to the end of the list.
+     */
     @Override
     public void addLast(E item) {
         Node<E> newNode = new Node<>(item, null);
@@ -149,6 +162,7 @@ public class SinglyLinkedList<E> implements List<E> {
         Node<E> toRemove = current.getNext();
         current.setNext(toRemove.getNext());
         toRemove.setNext(null);
+        size --;
         return toRemove.getData();
     }
     // returns size variable (number of variables in the list)
@@ -157,14 +171,13 @@ public class SinglyLinkedList<E> implements List<E> {
         return size;
     }
 
-    // returns boolean using logic with size variable
-    // (could be done better?)
+    /**
+     * @return true if there are no items currently stored in the list, false
+     * otherwise.
+     */
     @Override
     public boolean isEmpty() {
-        if(size == 0)
-            return true;
-        else
-            return false;
+        return this.head == null;
     }
 
     /**
@@ -179,13 +192,17 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void insert(E item, int index) {
+        if (index < 0 || index >= size)
+            return;
         Node<E> current = head;
-        if (index >= 0 || item != null)
+        if (index >= 0 || head != null)
             for (int i = 0; i < index; i++)
                 current = current.getNext();
             Node<E> newTemp = current.getNext();
             Node<E> newNode = new Node<>(item, newTemp);
             current.setNext(newNode);
+            size ++;
+
 
 
     }

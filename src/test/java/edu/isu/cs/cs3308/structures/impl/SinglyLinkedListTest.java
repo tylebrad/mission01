@@ -5,6 +5,7 @@
  */
 package edu.isu.cs.cs3308.structures.impl;
 
+import edu.isu.cs.cs3308.SinglyLinkedList;
 import edu.isu.cs.cs3308.structures.List;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
