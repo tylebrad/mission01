@@ -1,4 +1,4 @@
-package edu.isu.cs.cs3308.structures.impl;
+package edu.isu.cs.cs3308.structures;
 
 import edu.isu.cs.cs3308.structures.List;
 import java.io.ByteArrayOutputStream;
@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class to Implement List functions
+ * Class to Implement Singly Linked List
  *
  * @author Bradley Tyler
  * CS-3308 Mission 01
  */
 
-public class SinglyLinkedListTest {
+public class SinglyLinkedList<E> implements List<E>{
 
-    private List<Integer>;
+    protected Node<E>
+
+    }
+}
 
 
