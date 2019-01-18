@@ -4,7 +4,7 @@
  * @author Bradley Tyler
  * CS-3308 Mission 01
  */
-package edu.isu.cs.cs3308.structures;
+package edu.isu.cs.cs3308;
 
 public class Node<E>{
     // declaring variables
