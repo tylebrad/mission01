@@ -38,64 +38,103 @@ public class SinglyLinkedList<E> implements List<E> {
         public void setNext(Node<E> next){
             this.next = next;
         }
+        public Node<E> getPrev(){return prev;}
+        public void setPrev(Node<E> prev){
+            this.prev = prev;
+        }
     }
 
     //Instance variables
     protected Node<E> head;
     protected Node<E> tail;
     protected int size;
+    //Creation of empty list
+    public SinglyLinkedList(){}
 
-    // Access methods
+    /**Access methods using getData to return desired Node Data*/
+    //First
     @Override
     public E first() {
         if(isEmpty()) return null;
             return head.getData();
     }
-
+    //Last
     @Override
     public E last() {
         if(isEmpty()) return null;
             return tail.getData();
     }
 
-    // Update Methods
+    /** Update Methods */
+    //Adds item to beginning of the list
     @Override
     public void addFirst(E item) {
-        if (item == null)
-            return;
 
         Node<E> newNode = new Node<>(item);
-        newNode.setNext(head);
+        head.setNext(newNode);
         head = newNode;
+        size ++;
     }
-
+    //Adds item to the end of the list
     @Override
     public void addLast(E item) {
-        
+
+        Node<E> newNode = new Node<>(item);
+        if(isEmpty())
+            head = newNode;
+        else
+            tail.setNext(newNode);
+        tail = newNode;
+        size ++;
     }
+    //Removes first item from the list
     @Override
     public E removeFirst() {
-        return null;
+        if (isEmpty()) return null;
+        E answer = head.getData();
+        head = head.getNext();
+        size--;
+        if (size == 0)
+            tail = null;
+        return answer;
     }
-
+    //Removes last item from the list
     @Override
     public E removeLast() {
-        return null;
+        if (isEmpty()) return null;
+        E answer = tail.getData();
+        tail = tail.getPrev();
+        size --;
+        return answer;
     }
-
+    /**
+     * Retrieves the value at the specified index. Will return null if the index
+     * provided is less than 0 or greater than or equal to the current size of
+     * the list.
+     *
+     * @param index Index of the value to be retrieved.
+     * @return Element at the given index, or null if the index is less than 0
+     * or greater than or equal to the list size.
+     */
     @Override
     public E get(int index) {
         return null;
     }
 
+    // returns size variable
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
+    // isEmpty method using size variable
+    // (could be done better?)
     @Override
     public boolean isEmpty() {
-        return false;
+        if(size == 0)
+            return true;
+        else
+            return false;
     }
 
     @Override
