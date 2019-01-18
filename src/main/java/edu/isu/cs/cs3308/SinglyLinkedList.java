@@ -22,7 +22,13 @@ public class SinglyLinkedList<E> implements List<E> {
         private Node<E> next;
         private Node<E> prev;
         // public variable for node data
-        public Node(E data) {this.data = data;}
+        // public Node(E data) {this.data = data;}
+        // new call for Node
+        public Node(E d, Node<E> n){
+            this.data = d;
+            this.next = n;
+        }
+
 
         // gets data from node
         public E getData(){
@@ -31,23 +37,23 @@ public class SinglyLinkedList<E> implements List<E> {
 
         public void setData(E data) {this.data = data;}
         // returning next node
-        public Node<E> getNext(){
+        private Node<E> getNext(){
             return next;
         }
         // setting data to next node
-        public void setNext(Node<E> next){
+        private void setNext(Node<E> next){
             this.next = next;
         }
-        public Node<E> getPrev(){return prev;}
-        public void setPrev(Node<E> prev){
+        private Node<E> getPrev(){return prev;}
+        private void setPrev(Node<E> prev){
             this.prev = prev;
         }
     }
 
     //Instance variables
-    protected Node<E> head;
-    protected Node<E> tail;
-    protected int size;
+    private Node<E> head = null;
+    private Node<E> tail = null;
+    private int size = 0;
     //Creation of empty list
     public SinglyLinkedList(){}
 
@@ -69,8 +75,7 @@ public class SinglyLinkedList<E> implements List<E> {
     //Adds item to beginning of the list
     @Override
     public void addFirst(E item) {
-
-        Node<E> newNode = new Node<>(item);
+        Node<E> newNode = new Node<>(item, head);
         head.setNext(newNode);
         head = newNode;
         size ++;
@@ -78,8 +83,7 @@ public class SinglyLinkedList<E> implements List<E> {
     //Adds item to the end of the list
     @Override
     public void addLast(E item) {
-
-        Node<E> newNode = new Node<>(item);
+        Node<E> newNode = new Node<>(item, null);
         if(isEmpty())
             head = newNode;
         else
@@ -90,7 +94,8 @@ public class SinglyLinkedList<E> implements List<E> {
     //Removes first item from the list
     @Override
     public E removeFirst() {
-        if (isEmpty()) return null;
+        if (isEmpty())
+            return null;
         E answer = head.getData();
         head = head.getNext();
         size--;
@@ -99,9 +104,11 @@ public class SinglyLinkedList<E> implements List<E> {
         return answer;
     }
     //Removes last item from the list
+    //If i run into issues, its probably the initial logic
     @Override
     public E removeLast() {
-        if (isEmpty()) return null;
+        if (isEmpty())
+            return null;
         E answer = tail.getData();
         tail = tail.getPrev();
         size --;
@@ -118,31 +125,18 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public E get(int index) {
-        return null;
-    }
+        if (index < 0 || index >= size)
+            return null;
 
-    // returns size variable
-    @Override
-    public int size() {
-        return size;
-    }
+        Node<E> current = head;
+        for (int i = 0; i < index; i++)
+            current = current.getNext();
 
-    // isEmpty method using size variable
-    // (could be done better?)
-    @Override
-    public boolean isEmpty() {
-        if(size == 0)
-            return true;
-        else
-            return false;
+        Node<E> toHold = current;
+        return toHold.getData();
     }
-
-    @Override
-    public void insert(E item, int index) {
-    }
-
-    @Override
-    public void printList(){}
+    // Removes a node at a given index of the list
+    // reference from examples.lecture03
     @Override
     public E remove(int index) {
         if (index < 0 || index >= size)
@@ -157,6 +151,50 @@ public class SinglyLinkedList<E> implements List<E> {
         toRemove.setNext(null);
         return toRemove.getData();
     }
+    // returns size variable (number of variables in the list)
+    @Override
+    public int size() {
+        return size;
+    }
+
+    // returns boolean using logic with size variable
+    // (could be done better?)
+    @Override
+    public boolean isEmpty() {
+        if(size == 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Inserts the given element into the list at the provided index. The
+     * element will not be inserted if either the element provided is null or if
+     * the index provided is less than 0. If the index is greater than or equal
+     * to the current size of the list, the element will be added to the end of
+     * the list.
+     *
+     * @param item Item to be added (as long as it is not null).
+     * @param index Index in the list where the element is to be inserted.
+     */
+    @Override
+    public void insert(E item, int index) {
+        Node<E> current = head;
+        if (index >= 0 || item != null)
+            for (int i = 0; i < index; i++)
+                current = current.getNext();
+            Node<E> newTemp = current.getNext();
+            Node<E> newNode = new Node<>(item, newTemp);
+            current.setNext(newNode);
+
+
+    }
+    // prints list using system.out
+    @Override
+    public void printList(){
+
+    }
+
 }
 
 
