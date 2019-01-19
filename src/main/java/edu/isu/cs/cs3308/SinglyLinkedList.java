@@ -6,6 +6,8 @@ import edu.isu.cs.cs3308.structures.List;
 /**
  * Class to Implement a Singly Linked List
  *
+ * -Reference: Method comments provided by List interface
+ *
  * @author Bradley Tyler
  * CS-3308 Mission 01
  */
@@ -21,9 +23,7 @@ public class SinglyLinkedList<E> implements List<E> {
         private E data;
         private Node<E> next;
         private Node<E> prev;
-        // public variable for node data
-        // public Node(E data) {this.data = data;}
-        // new call for Node
+
         public Node(E d, Node<E> n){
             this.data = d;
             this.next = n;
@@ -50,7 +50,7 @@ public class SinglyLinkedList<E> implements List<E> {
         }
     }
 
-    //Instance variables
+    //Instance variables for SinglyLinked List
     private Node<E> head = null;
     private Node<E> tail = null;
     private int size = 0;
@@ -96,15 +96,20 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void addLast(E item) {
-        Node<E> newNode = new Node<>(item, null);
-        if(isEmpty())
+        if (item == null)
+            return;
+        Node<E> newNode = new Node<>(item, null); //creates newNode with null pointer
+        if(isEmpty())//if the list is empty, head becomes the first and only item in the list.
             head = newNode;
         else
-            tail.setNext(newNode);
+            tail.setNext(newNode); // otherwise, we grab the current tail, and set its tail to the new new node
         tail = newNode;
         size ++;
     }
-    //Removes first item from the list
+
+
+    // removes first item from the list, unless the list is empty
+    // decrements size by 1
     @Override
     public E removeFirst() {
         if (isEmpty())
@@ -116,8 +121,8 @@ public class SinglyLinkedList<E> implements List<E> {
             tail = null;
         return answer;
     }
-    //Removes last item from the list
-    //If i run into issues, its probably the initial logic
+    //Removes last item from the list, unless list is empty
+    //Decrements size by 1
     @Override
     public E removeLast() {
         if (isEmpty())
@@ -148,8 +153,8 @@ public class SinglyLinkedList<E> implements List<E> {
         Node<E> toHold = current;
         return toHold.getData();
     }
-    // Removes a node at a given index of the list
-    // reference from examples.lecture03
+    // Removes a node at a given index of the list, unless index given is below 0,
+    // or below the size of the list
     @Override
     public E remove(int index) {
         if (index < 0 || index >= size)
@@ -192,10 +197,10 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void insert(E item, int index) {
-        if (index < 0 || index >= size)
+        if (index < 0 || item == null)
             return;
         Node<E> current = head;
-        if (index >= 0 || head != null)
+        if (index >= 0 || item != null)
             for (int i = 0; i < index; i++)
                 current = current.getNext();
             Node<E> newTemp = current.getNext();
@@ -206,7 +211,10 @@ public class SinglyLinkedList<E> implements List<E> {
 
 
     }
-    // prints list using system.out
+    /**
+     * Prints the contents of the list in a single line separating each element
+     * by a space to the default System.out
+     */
     @Override
     public void printList(){
 
