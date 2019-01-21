@@ -161,7 +161,7 @@ public class SinglyLinkedList<E> implements List<E> {
             return null;
 
         Node<E> current = head;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < index - 1; i++)
             current = current.getNext();
 
         Node<E> toRemove = current.getNext();
@@ -197,16 +197,22 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void insert(E item, int index) {
-        if (index < 0 || item == null)
+      //  if(this.head == null && index != 0) {
+      //      return;
+      //  }
+       // else if(this.head == null && index == 0){
+       //     this.head =
+     //   }
+        if (index < 1 || index > size +1)
             return;
+
         Node<E> current = head;
-        if (index >= 0 || item != null)
-            for (int i = 0; i < index; i++)
-                current = current.getNext();
-            Node<E> newTemp = current.getNext();
-            Node<E> newNode = new Node<>(item, newTemp);
-            current.setNext(newNode);
-            size ++;
+        for (int i = 0; i < index - 1; i++)
+            current = current.getNext();
+        Node<E> newTemp = current;
+        Node<E> newNode = new Node<>(item, newTemp);
+        current.setNext(newNode);
+        size ++;
 
 
 
