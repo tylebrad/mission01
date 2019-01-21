@@ -24,11 +24,11 @@ public class SinglyLinkedList<E> implements List<E> {
         private Node<E> next;
         private Node<E> prev;
 
+        // Node constructor
         public Node(E d, Node<E> n){
             this.data = d;
             this.next = n;
         }
-
 
         // gets data from node
         public E getData(){
@@ -98,7 +98,7 @@ public class SinglyLinkedList<E> implements List<E> {
     public void addLast(E item) {
         if (item == null)
             return;
-        Node<E> newNode = new Node<>(item, null); //creates newNode with null pointer
+        Node<E> newNode = new Node<>(item, null); //creates newNode pointing to null
         if(isEmpty())//if the list is empty, head becomes the first and only item in the list.
             head = newNode;
         else
@@ -189,7 +189,7 @@ public class SinglyLinkedList<E> implements List<E> {
      * Inserts the given element into the list at the provided index. The
      * element will not be inserted if either the element provided is null or if
      * the index provided is less than 0. If the index is greater than or equal
-     * to the current size of the list, the element will be added to the end of
+     * to the current size of the list, the item will be added to the end of
      * the list.
      *
      * @param item Item to be added (as long as it is not null).
@@ -197,21 +197,27 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void insert(E item, int index) {
-      //  if(this.head == null && index != 0) {
-      //      return;
-      //  }
-       // else if(this.head == null && index == 0){
-       //     this.head =
-     //   }
-        if (index < 1 || index > size +1)
+        Node<E> newInsert = new Node(item, null); // declaring variable for new Insert
+        Node<E> current = head;
+        if(item == null || index < 0) // returns nothing if item is null or index is less than 0
             return;
 
-        Node<E> current = head;
+        //if(index == 0) //sets item to head if index is 0 and item isn't null
+          // this.head = newInsert;
+
+
+        if(index >= this.size() || index != 0) {//Inserts to end of the list if index>size
+            this.tail.setNext(newInsert); // sets current tails next to newInsert
+            this.tail = newInsert; // sets newInsert as new tail
+
+        }
+        else
+        // setting head to current, and Climbing
         for (int i = 0; i < index - 1; i++)
             current = current.getNext();
-        Node<E> newTemp = current;
-        Node<E> newNode = new Node<>(item, newTemp);
-        current.setNext(newNode);
+        Node<E> newTemp = current.getNext(); // holding data previously stored at index
+        current.setNext(newInsert); // setting index previous to desired location's TAIL to a new node
+        newInsert.setNext(newTemp); // setting newInsert's tail to new temp
         size ++;
 
 
@@ -223,6 +229,15 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void printList(){
+         if(isEmpty())
+             return;
+         Node<E> newTemp = this.head;
+         // while loop that prints each item in a list with a line separator
+         // UNTIL an item in the list is null
+         while (newTemp != null) {
+             System.out.print(newTemp.data + System.lineSeparator());
+             newTemp = newTemp.getNext();
+         }
 
     }
 
