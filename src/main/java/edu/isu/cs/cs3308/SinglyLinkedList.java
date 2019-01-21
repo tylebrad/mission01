@@ -198,31 +198,24 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public void insert(E item, int index) {
         Node<E> newInsert = new Node(item, null); // declaring variable for new Insert
-        Node<E> current = head;
-        if(item == null || index < 0) // returns nothing if item is null or index is less than 0
-            return;
+         Node<E> current = head;
+         if(item == null || index < 0) // returns nothing if item is null or index is less than 0
+         return;
 
-        //if(index == 0) //sets item to head if index is 0 and item isn't null
-          // this.head = newInsert;
-
-
-        if(index >= this.size() || index != 0) {//Inserts to end of the list if index>size
-            this.tail.setNext(newInsert); // sets current tails next to newInsert
-            this.tail = newInsert; // sets newInsert as new tail
-
-        }
-        else
-        // setting head to current, and Climbing
-        for (int i = 0; i < index - 1; i++)
-            current = current.getNext();
-        Node<E> newTemp = current.getNext(); // holding data previously stored at index
-        current.setNext(newInsert); // setting index previous to desired location's TAIL to a new node
-        newInsert.setNext(newTemp); // setting newInsert's tail to new temp
-        size ++;
-
-
-
+         if(index >= this.size()) { //Inserts to end of the list if index>size
+         this.tail.setNext(newInsert); // sets current tails next to newInsert
+         this.tail = newInsert; // sets newInsert as new tail
+         }
+         else
+         // setting head to current, and Climbing
+         for (int i = 0; i < index - 1; i++)
+         current = current.getNext();
+         Node<E> newTemp = current.getNext(); // holding data previously stored at index
+         current.setNext(newInsert); // setting index previous to desired location's TAIL to a new node
+         newInsert.setNext(newTemp); // setting newInsert's tail to new temp
+         size ++;
     }
+    
     /**
      * Prints the contents of the list in a single line separating each element
      * by a space to the default System.out

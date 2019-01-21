@@ -31,10 +31,9 @@ public class Scoreboard {
      * @param entry Entry to be added.
      */
     public void add(GameEntry entry) {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        if(entry == null)
+        if(entry == null || this.size() >= this.capacity) // doing nothing if entry is null or >= capacity
             return;
-        board.addFirst(entry);
+        board.addFirst(entry); //adding entry otherwise
     }
 
     /**
@@ -46,7 +45,8 @@ public class Scoreboard {
      * to the list size or less than zero.
      */
     public GameEntry remove(int i) throws IndexOutOfBoundsException {
-       // throw new UnsupportedOperationException("Not supported yet.");
+        if(i >= capacity || i < 0) // checks for capacity and throws exception if higher
+            throw new IndexOutOfBoundsException("Out of bounds");
         return board.remove(i);
     }
 
