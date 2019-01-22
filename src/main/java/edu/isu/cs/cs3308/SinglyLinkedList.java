@@ -18,11 +18,11 @@ public class SinglyLinkedList<E> implements List<E> {
      *Class to create Nodes for SinglyLinkedList
      *Nested Within SinglyLinkedList
      */
-    private static class Node<E>{
+    public static class Node<E>{
         // declaring variables
-        private E data;
-        private Node<E> next;
-        private Node<E> prev;
+        public E data;
+        public Node<E> next;
+        public Node<E> prev;
 
         // Node constructor
         public Node(E d, Node<E> n){
@@ -37,23 +37,23 @@ public class SinglyLinkedList<E> implements List<E> {
 
         public void setData(E data) {this.data = data;}
         // returning next node
-        private Node<E> getNext(){
+        public Node<E> getNext(){
             return next;
         }
         // setting data to next node
-        private void setNext(Node<E> next){
+        public void setNext(Node<E> next){
             this.next = next;
         }
-        private Node<E> getPrev(){return prev;}
-        private void setPrev(Node<E> prev){
+        public Node<E> getPrev(){return prev;}
+        public void setPrev(Node<E> prev){
             this.prev = prev;
         }
     }
 
     //Instance variables for SinglyLinked List
-    private Node<E> head = null;
-    private Node<E> tail = null;
-    private int size = 0;
+    public Node<E> head = null;
+    public Node<E> tail = null;
+    public int size = 0;
     //Creation of empty list
     public SinglyLinkedList(){}
 
@@ -85,6 +85,8 @@ public class SinglyLinkedList<E> implements List<E> {
                 return;
         Node<E> newNode = new Node<>(item, head);
         newNode.setNext(head);
+        if (isEmpty())
+            tail = newNode;
         head = newNode;
         size ++;
     }
@@ -101,9 +103,10 @@ public class SinglyLinkedList<E> implements List<E> {
         Node<E> newNode = new Node<>(item, null); //creates newNode pointing to null
         if(isEmpty())//if the list is empty, head becomes the first and only item in the list.
             head = newNode;
+
         else
-            tail.setNext(newNode); // otherwise, we grab the current tail, and set its tail to the new new node
-        tail = newNode;
+            this.tail.setNext(newNode); // otherwise, we grab the current tail, and set it's next to the new node
+        this.tail = newNode;
         size ++;
     }
 
@@ -197,25 +200,26 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void insert(E item, int index) {
-        Node<E> newInsert = new Node(item, null); // declaring variable for new Insert
-         Node<E> current = head;
+         Node<E> newInsert = new Node<>(item, null); // declaring variable for new Insert
+         Node<E> current = this.head;
          if(item == null || index < 0) // returns nothing if item is null or index is less than 0
-         return;
+            return;
 
          if(index >= this.size()) { //Inserts to end of the list if index>size
-         this.tail.setNext(newInsert); // sets current tails next to newInsert
-         this.tail = newInsert; // sets newInsert as new tail
+            this.tail.setNext(newInsert); // sets current tails next to newInsert
+            this.tail = newInsert; // sets newInsert as new tail
+
          }
          else
-         // setting head to current, and Climbing
-         for (int i = 0; i < index - 1; i++)
-         current = current.getNext();
-         Node<E> newTemp = current.getNext(); // holding data previously stored at index
-         current.setNext(newInsert); // setting index previous to desired location's TAIL to a new node
-         newInsert.setNext(newTemp); // setting newInsert's tail to new temp
-         size ++;
+             // setting head to current, and Climbing
+             for (int i = 0; i < index - 1; i++)
+                 current = current.getNext();
+             Node<E> newTemp = current.getNext(); // holding data previously stored at index
+             current.setNext(newInsert); // setting index previous to desired location's TAIL to a new node
+             newInsert.setNext(newTemp); // setting newInsert's tail to new temp
+             size ++;
     }
-    
+
     /**
      * Prints the contents of the list in a single line separating each element
      * by a space to the default System.out
@@ -224,12 +228,12 @@ public class SinglyLinkedList<E> implements List<E> {
     public void printList(){
          if(isEmpty())
              return;
-         Node<E> newTemp = this.head;
+         Node<E> current = this.head;
          // while loop that prints each item in a list with a line separator
          // UNTIL an item in the list is null
-         while (newTemp != null) {
-             System.out.print(newTemp.data + System.lineSeparator());
-             newTemp = newTemp.getNext();
+         while (current != null) {
+             System.out.print(current.data + System.lineSeparator());
+             current = current.getNext();
          }
 
     }

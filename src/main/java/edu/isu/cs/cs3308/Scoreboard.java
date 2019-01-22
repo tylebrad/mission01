@@ -1,7 +1,7 @@
 package edu.isu.cs.cs3308;
 
 import edu.isu.cs.cs3308.structures.List;
-import edu.isu.cs.cs3308.SinglyLinkedList;
+
 
 /**
  * A class used to represent a scoreboard for a game which is constrained to
